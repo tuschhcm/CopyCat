@@ -11,6 +11,9 @@ void setup(){
   pinMode(BUTTON1, INPUT);
   pinMode(BUTTON2, INPUT);
   pinMode(BUTTON3, INPUT);
+  digitalWrite(BUTTON1, HIGH);
+  digitalWrite(BUTTON2, HIGH);
+  digitalWrite(BUTTON3, HIGH);
   pinMode(LEDR, OUTPUT);
   pinMode(LEDG, OUTPUT);
   pinMode(LEDB, OUTPUT);
@@ -24,17 +27,24 @@ void setup(){
 //create a new game
 CopyCat simon;
 
+// keep track of the current level
+int level = 0;
+
 void loop(){
-  simon.playPattern(0);
+  if (level >= 10) {
+    digitalWrite(LEDR, LOW);
+    delay(3000);
+    digitalWrite(LEDR, HIGH);
+    level = 0;
+  }
+
+  simon.playPattern(level);
   delay(10);
   simon.recievePattern(BUTTON1, BUTTON2, BUTTON3, 0);
   delay(10);
   
-  if(simon.compare(1)){
-    digitalWrite(LEDG, LOW);
-    delay(3000);
-    digitalWrite(LEDG, HIGH);
-    delay(250);
+  if(simon.compare(level)){
+    level++;
   }else{
     digitalWrite(LEDR, LOW);
     delay(3000);

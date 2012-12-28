@@ -8,7 +8,7 @@
 //<<constructor>>
 CopyCat::CopyCat(){
     //create pattern
-    randomSeed(analogRead(0));
+    randomSeed(analogRead(5));
     
     for(int i = 0; i < 10; i++){
         
@@ -37,22 +37,22 @@ void CopyCat::recievePattern(int r, int g, int b, int i){
 
         // get button press from user
         do{
-            if(digitalRead(r) == HIGH){
+            if(digitalRead(r) == LOW){
                 playerPattern[buttonPresses] = RED;
                 buttonPressed = true;
 
-            }else if(digitalRead(g) == HIGH){
+            }else if(digitalRead(g) == LOW){
                 playerPattern[buttonPresses] = GREEN;
                 buttonPressed = true;
             
-            }else if(digitalRead(b) == HIGH){
+            }else if(digitalRead(b) == LOW){
                 playerPattern[buttonPresses] = BLUE;
                 buttonPressed = true;
             }
         }while(!buttonPressed);
 
         //delay for bounce back of button
-        //delay(250);
+        delay(500);
     }
 }
 
@@ -60,7 +60,7 @@ void CopyCat::recievePattern(int r, int g, int b, int i){
 bool CopyCat::compare(int i){
     
     //compare patterns to the current index
-    for(int n = 0; n < i; n++){
+    for(int n = 0; n <= i; n++){
         if(gamePattern[n] != playerPattern[n]){
             return false;
         }
