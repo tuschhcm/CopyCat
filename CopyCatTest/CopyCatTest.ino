@@ -40,7 +40,7 @@ void loop(){
 
   simon.playPattern(level);
   delay(10);
-  simon.recievePattern(BUTTON1, BUTTON2, BUTTON3, 0);
+  simon.recievePattern(BUTTON1, BUTTON2, BUTTON3, level);
   delay(10);
   
   if(simon.compare(level)){
