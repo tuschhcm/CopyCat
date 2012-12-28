@@ -6,15 +6,20 @@
 #define BLUE 11
 
 //<<constructor>>
-CopyCat::CopyCat(){
-    //create pattern
-    randomSeed(analogRead(5));
-    
+CopyCat::CopyCat(){}
+
+void CopyCat::newGame(){
+     //create pattern
+    randomSeed(analogRead(0));
+    Serial.begin(9600);
+    Serial.println(analogRead(0));
+
     for(int i = 0; i < 10; i++){
         
         //random number bounds determine LED Pins
         gamePattern[i] = (int)random(9,12);
     }
+   
 }
 
 //play the pattern to the player
