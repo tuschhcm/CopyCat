@@ -45,19 +45,25 @@ void CopyCat::recievePattern(int r, int g, int b, int i){
             if(digitalRead(r) == LOW){
                 playerPattern[buttonPresses] = RED;
                 buttonPressed = true;
+				digitalWrite(RED, LOW);
 
             }else if(digitalRead(g) == LOW){
                 playerPattern[buttonPresses] = GREEN;
                 buttonPressed = true;
+				digitalWrite(GREEN, LOW);
             
             }else if(digitalRead(b) == LOW){
                 playerPattern[buttonPresses] = BLUE;
                 buttonPressed = true;
+				digitalWrite(BLUE, LOW);
             }
         }while(!buttonPressed);
 
         //delay for bounce back of button
-        delay(500);
+        delay(250);
+		digitalWrite(RED, HIGH);
+		digitalWrite(GREEN, HIGH);
+		digitalWrite(BLUE, HIGH);
     }
 }
 

@@ -24,18 +24,19 @@ void setup(){
   digitalWrite(LEDB, HIGH);
 }
 
-//create a new game
+//Create New Game
 CopyCat simon;
 
 // keep track of the current level
-int level = 0;
+int level = 11;
 
 void loop(){
   if (level >= 10) {
-    digitalWrite(LEDR, LOW);
-    delay(3000);
-    digitalWrite(LEDR, HIGH);
+    cycle(3);
     level = 0;
+    delay(1000);
+    
+    simon.newGame();
   }
 
   simon.playPattern(level);
@@ -45,10 +46,35 @@ void loop(){
   
   if(simon.compare(level)){
     level++;
+    delay(1000);
   }else{
+    blink(5);
+    delay(500);
+  }
+}
+
+void blink(int n) {
+  for(int i = 0; i < n; i++){
     digitalWrite(LEDR, LOW);
-    delay(3000);
+    delay(100);
     digitalWrite(LEDR, HIGH);
-    delay(250);
+    delay(100);
+  }
+}
+
+void cycle(int n){
+  for(int i = 0; i < n; i++){
+  digitalWrite(LEDR, LOW);
+  delay(100);
+  digitalWrite(LEDR, HIGH);
+  delay(100);
+  digitalWrite(LEDG, LOW);
+  delay(100);
+  digitalWrite(LEDG, HIGH);
+  delay(100);
+  digitalWrite(LEDB, LOW);
+  delay(100);
+  digitalWrite(LEDB, HIGH);
+  delay(100);
   }
 }
